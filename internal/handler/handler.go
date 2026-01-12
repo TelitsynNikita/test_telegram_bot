@@ -12,15 +12,16 @@ type Handler struct {
 }
 
 func NewHandler(token string, service service.Service) *Handler {
+	bot := tbot.New(token)
+
 	return &Handler{
-		Server:  tbot.New(token),
+		Server:  bot,
 		Service: service,
+		Client:  bot.Client(),
 	}
 }
 
 func (h *Handler) InitHandlers() {
-	h.Client = h.Server.Client()
-
 	h.Server.HandleMessage("/start", func(m *tbot.Message) {
 		btnRock := tbot.InlineKeyboardButton{
 			Text:         "Rock",
