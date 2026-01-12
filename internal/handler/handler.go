@@ -45,9 +45,6 @@ func (h *Handler) InitHandlers() {
 	})
 
 	h.Server.HandleCallback(func(query *tbot.CallbackQuery) {
-		if query.From.ID != 362009135 {
-			return
-		}
 		h.Server.Client().SendMessage(query.Message.Chat.ID, query.Data)
 	})
 }
